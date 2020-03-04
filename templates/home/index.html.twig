@@ -9,6 +9,14 @@
 
 	<main id="home-page" class="container">
 		<h1 class="text-center text-danger">{{ title }}!</h1>
+		<div class="jumbotron">
+			<p>Blog realizado en <strong>symfony 5</strong> con las siguientes librerías:</p>
+
+			<ul class="mb-0">
+				<li>Bootstrap 4</li>
+				<li>jQuery 3.4.1</li>
+			</ul>
+		</div>
 		<hr>
 
 
@@ -33,6 +41,10 @@
 						</div>
 					</div>
 				</article>
+			</div>
+
+			<div class="my-3 text-right">
+				<a href="{{ path('blog_list') }}" class="btn btn-danger">VER TODAS</a>
 			</div>
 		</section>
 	</main>
