@@ -24,15 +24,11 @@
 			<h2 class="subtitle">Últimas publicaciones</h2>
 
 			<div class="row">
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 1' } only %}
-				</article>
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 2' } only %}
-				</article>
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 3' } only %}
-				</article>
+				{% for post in posts %}
+					<article class="col-md-4">
+						{% include '_parts/post-item.html.twig' with { 'post': post } only %}
+					</article>
+				{% endfor %}
 			</div>
 
 			<div class="my-3 text-right">
