@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block body %}
+
+
+	<main id="home-page" class="container">
+		<h1 class="text-center text-danger">{{ title }}!</h1>
+		<hr>
+
+
+		<section class="last-posts">
+			<h2 class="subtitle">Últimas publicaciones</h2>
+
+			<div class="row">
+				<article class="col-md-4">
+					<div class="last-posts__item">
+						<img src="{{ asset('build/images/post-image-dummy.png') }}" alt="Post title dummy" class="img-fluid">
+
+						<div class="info-container">
+							<div>
+								<a class="post-title" href="#">Post title dummy</a>
+								<small class="post-date">30 de Enero del 2020</small>
+
+								<p class="post-excerpt">Lorem ipsum dolor sit ammet consectetur adispiscing lol...</p>
+							</div>
+							<div>
+								<img src="{{ asset('build/images/post-autor-dummy.png') }}" alt="Post Author" title="Post Author" class="img-fluid img-thumbnail rounded-circle">
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+	</main>
+{% endblock %}

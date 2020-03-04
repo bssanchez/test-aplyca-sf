@@ -1,0 +1,41 @@
+/* 
+    Created on : 03/03/2020, 05:30:06 PM
+    Author     : Brandon Sanchez <bssanchez@ymail.com>
+    File       : _header.scss
+*/
+
+#header {
+  .navbar {
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          color: white;
+          font-size: 1em;
+        }
+      }
+    }
+
+    .navbar-brand {
+      img {
+        // @include sm {
+        //   height: 60px;
+        // }
+
+        height: 60px;
+        transition: height 0.3s ease;
+      }
+    }
+
+    &.sticky {
+      .navbar-brand {
+        img {
+          height: 40px;
+        }
+      }
+
+      background: $primary;
+    }
+
+    transition: background 0.3s ease;
+  }
+}

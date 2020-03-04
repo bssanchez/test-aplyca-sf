@@ -1,0 +1,19 @@
+#app-root {
+  .subtitle {
+    &:after {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: $secondary;
+    }
+
+    color: $secondary;
+    padding-bottom: 0.5rem;
+    position: relative;
+  }
+
+  padding-top: 80px;
+}

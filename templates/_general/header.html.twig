@@ -1,0 +1,26 @@
+<header id="header">
+	<nav id="main-menu" class="navbar navbar-expand-lg px-sm-0 navbar-primary bg-primary fixed-top">
+		<div class="container">
+			<a class="navbar-brand py-md-0" href="index.php">
+				<img src="{{ asset('build/images/logo.png') }}" alt="Capaz">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavMain" aria-controls="navbarNavMain" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavMain">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('index') }}">INICIO</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('blog_list') }}">BLOG</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('contact') }}">CONTACTO</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
