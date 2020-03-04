@@ -22,3 +22,6 @@ blog_edit:
 contact:
   path: contact-us
   controller: App\Controller\ContactController::index
+save_contact:
+  path: contact-us/save
+  controller: App\Controller\ContactController::save

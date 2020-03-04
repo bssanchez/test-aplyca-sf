@@ -11,19 +11,29 @@
 		<p class="text-center">A countinuación encontrarás un formulario con el podrás hacernos llegar tus inquietudes, problemas o sugerencias.</p>
 		<hr class="my-4">
 
-		<form action="" method="post">
+		{{ form_errors(form) }}
+
+
+		<form action="{{ path('save_contact') }}" method="post">
 			<section class="form-container">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="name">Nombre<sup>*</sup></label>
-							<input type="text" name="name" id="name" class="form-control" placeholder="ej. Sherlock Holmes">
+							<label for="contact_name">
+								Nombre<sup>*</sup>
+							</label>
+							{# <input type="text" name="name" id="name" class="form-control" placeholder=""> #}
+							{{ form_widget(form.name, {'attr': {'placeholder': 'ej. Sherlock Holmes'} }) }}
+							{{ form_errors(form.name) }}
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="email">Correo electrónico<sup>*</sup></label>
-							<input type="email" name="email" id="email" class="form-control" placeholder="ej. sholmes@bakerstreet.dom">
+							<label for="contact_email">
+								Correo electrónico<sup>*</sup>
+							</label>
+							{{ form_widget(form.email, {'attr': {'placeholder': 'ej. sholmes@bakerstreet.dom'} }) }}
+							{{ form_errors(form.email) }}
 						</div>
 					</div>
 				</div>
@@ -31,13 +41,20 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="form-group">
-							<label for="email">Mensaje<sup>*</sup></label>
-							<textarea rows="5" name="message" id="message" class="form-control" placeholder="ej. Hola mundo!"></textarea>
+							<label for="contact_message">
+								Mensaje<sup>*</sup>
+							</label>
+							{{ form_widget(form.message, {'attr': {'placeholder': 'ej. Hola mundo!', 'rows': 5} }) }}
+							{{ form_errors(form.message) }}
 						</div>
 					</div>
 
+					{{ form_rest(form) }}
 					<div class="col-12 text-right">
-						<button type="submit" class="btn btn-outline-primary"><i class="far fa-paper-plane"> </i> ENVIAR</button>
+						<button type="submit" class="btn btn-outline-primary">
+							<i class="far fa-paper-plane"></i>
+							ENVIAR
+						</button>
 					</div>
 				</div>
 			</section>
