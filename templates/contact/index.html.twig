@@ -1,20 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}
+	Contáctanos
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<main id="contact-page" class="container py-4">
+		<h1 class="text-center text-danger">{{ title }}</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<p class="text-center">A countinuación encontrarás un formulario con el podrás hacernos llegar tus inquietudes, problemas o sugerencias.</p>
+		<hr class="my-4">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/http/labs/web/test-aplyca-sf/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/http/labs/web/test-aplyca-sf/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
+		<form action="" method="post">
+			<section class="form-container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="name">Nombre<sup>*</sup></label>
+							<input type="text" name="name" id="name" class="form-control" placeholder="ej. Sherlock Holmes">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="email">Correo electrónico<sup>*</sup></label>
+							<input type="email" name="email" id="email" class="form-control" placeholder="ej. sholmes@bakerstreet.dom">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12">
+						<div class="form-group">
+							<label for="email">Mensaje<sup>*</sup></label>
+							<textarea rows="5" name="message" id="message" class="form-control" placeholder="ej. Hola mundo!"></textarea>
+						</div>
+					</div>
+
+					<div class="col-12 text-right">
+						<button type="submit" class="btn btn-outline-primary"><i class="far fa-paper-plane"> </i> ENVIAR</button>
+					</div>
+				</div>
+			</section>
+		</form>
+	</main>
 {% endblock %}
