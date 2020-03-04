@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Post;
 
 class BlogController extends AbstractController
 {
@@ -12,8 +13,12 @@ class BlogController extends AbstractController
      */
     public function index($page = 1)
     {
+        $posts = $this->getDoctrine()->getRepository(Post::class)
+            ->findAllWithAuthor();
+
         return $this->render('blog/index.html.twig', [
             'title' => 'BLOG',
+            'posts' => $posts
         ]);
     }
 

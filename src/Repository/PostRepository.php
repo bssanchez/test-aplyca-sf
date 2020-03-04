@@ -36,6 +36,20 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findAllWithAuthor($orderBy = 'published_date', $order = 'DESC')
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('u')
+            ->orderBy("p.{$orderBy}", $order)
+            ->innerJoin('p.autor', 'u')
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY)
+        ;
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

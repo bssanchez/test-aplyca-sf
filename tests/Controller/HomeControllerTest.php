@@ -28,7 +28,7 @@ class HomeControllerTest extends WebTestCase
     }
 
     /**
-     * @description Check if exists 3 post in last posts
+     * @description Check if exists posts in last posts section
      */
     public function testIndexLastPost()
     {

@@ -13,21 +13,11 @@
 
 		<section class="post-list">
 			<div class="row">
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 1' } only %}
-				</article>
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 2', 'edit': true } only %}
-				</article>
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 3' } only %}
-				</article>
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 4', 'edit': true } only %}
-				</article>
-				<article class="col-md-4">
-					{% include '_parts/post-item.html.twig' with { 'title': 'Post title dummy 5' } only %}
-				</article>
+				{% for post in posts %}
+					<article class="col-md-4">
+						{% include '_parts/post-item.html.twig' with { 'post': post } only %}
+					</article>
+				{% endfor %}
 			</div>
 		</section>
 	</main>
