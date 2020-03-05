@@ -13,40 +13,37 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index()
+    public function index(Request $request)
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
+
+        $message = ['text' => '', 'class' => ''];
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $contact->setSendDate(new \DateTime('now'));
+                $contact = $form->getData();
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($contact);
+                $entityManager->flush();
+
+                $message = ['text' => 'Datos enviados satifactoriamente', 'class' => 'alert-success'];
+                
+                unset($contact, $form);
+                $contact = new Contact();
+                $form = $this->createForm(ContactType::class, $contact);
+            } else {
+                $message = ['text' => 'Uno o más campos son inválidos, por favor revise e intente nuevamente', 'class' => 'alert-danger'];
+            }
+        }
 
         return $this->render('contact/index.html.twig', [
             'title' => 'CONTÁCTANOS',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'message' => $message
         ]);
-    }
-
-    public function save(Request $request)
-    {
-        $contact = new Contact();
-        $contact->setSendDate(new \DateTime('now'));
-
-        $form = $this->createForm(ContactType::class, $contact);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            
-            // $contact = $form->getData();
-            // echo "<pre>";
-            // print_r($contact);
-
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($task);
-            // $entityManager->flush();
-            // die('seeeee');
-            return $this->redirectToRoute('contact');
-        }
     }
 }
