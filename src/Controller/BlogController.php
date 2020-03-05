@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Post;
+use App\Form\BlogType;
 
 class BlogController extends AbstractController
 {
@@ -37,12 +38,38 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route(
+     *   "/edit/{post_id}", 
+     *   name="blog_post", 
+     *   requirements={"id"="\d+"}
+     * )
+     */
+    public function editPost($post_id)
+    {
+        $message = ['text' => '', 'class' => ''];
+
+        return $this->render('blog/form.html.twig', [
+            'title' => 'EDITAR PUBLICACIÓN',
+            'message' => $message
+        ]);
+    }
+
+    /**
      * @Route("/new", name="new_post")
      */
     public function newPost()
     {
-        return $this->render('blog/index.html.twig', [
-            'title' => 'CREAR PUBLICACIÓN'
+        $message = ['text' => '', 'class' => ''];
+
+        $post = new Post();
+        $form = $this->createForm(BlogType::class, $post);
+
+        $message = ['text' => '', 'class' => ''];
+
+        return $this->render('blog/form.html.twig', [
+            'title' => 'CREAR PUBLICACIÓN',
+            'message' => $message,
+            'form' => $form->createView()
         ]);
     }
 }

@@ -16,7 +16,7 @@ blog_list:
     page: '\d+'
 blog_edit:
   path: /edit/{post_id}
-  controller: App\Controller\BlogController::index
+  controller: App\Controller\BlogController::editPost
   requirements:
     post_id: '\d+'
 contact:
