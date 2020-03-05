@@ -29,7 +29,7 @@ class UserController extends AbstractController
         $form = $this->createForm(RegisterType::class, $user);
 
         $message = ['text' => '', 'class' => ''];
-        // dump($user); die;
+
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
