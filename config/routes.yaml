@@ -25,3 +25,6 @@ contact:
 save_contact:
   path: contact-us/save
   controller: App\Controller\ContactController::save
+register:
+  path: register
+  controller: App\Controller\UserController::register
