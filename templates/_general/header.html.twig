@@ -19,6 +19,22 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('contact') }}">CONTACTO</a>
 					</li>
+
+					{% if is_granted('IS_AUTHENTICATED_FULLY') and app.user %}
+						<li class="nav-item dropdown bg-danger">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarUserdata" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Hola, {{ app.user.fullname }}
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarUserdata">
+								<a class="dropdown-item" href="{{ path('app_logout') }}">Cerrar sesión</a>
+								<a class="dropdown-item" href="{{ path('new_post') }}">Nueva publicación</a>
+							</div>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login') }}">INICIAR SESIÓN</a>
+						</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
