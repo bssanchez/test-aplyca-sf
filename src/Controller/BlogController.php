@@ -35,4 +35,14 @@ class BlogController extends AbstractController
             'controller_name' => 'BlogDetailController',
         ]);
     }
+
+    /**
+     * @Route("/new", name="new_post")
+     */
+    public function newPost()
+    {
+        return $this->render('blog/index.html.twig', [
+            'title' => 'CREAR PUBLICACIÓN'
+        ]);
+    }
 }

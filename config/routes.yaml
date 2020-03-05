@@ -28,3 +28,6 @@ save_contact:
 register:
   path: register
   controller: App\Controller\UserController::register
+new_post:
+  path: new
+  controller: App\Controller\BlogController::newPost
