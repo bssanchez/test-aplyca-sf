@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Entity\Post;
+use App\Entity\User;
 use App\Form\BlogType;
 
 class BlogController extends AbstractController
@@ -34,8 +35,17 @@ class BlogController extends AbstractController
      */
     public function detail($username, $slug)
     {
+        $post = $this->getDoctrine()->getRepository(Post::class)->findByUsernameAndSlug(
+            $username,
+            $slug
+        );
+
+        if (count($post) == 0) {
+            return $this->redirect($this->generateUrl('blog_list'));
+        }
+
         return $this->render('blog/detail.html.twig', [
-            'controller_name' => 'BlogDetailController',
+            'post' => $post[0],
         ]);
     }
 

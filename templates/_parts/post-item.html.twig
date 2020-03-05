@@ -3,7 +3,7 @@
 
 	<div class="info-container">
 		<div>
-			<a class="post-title" href="#">{{ post.title }}</a>
+			<a class="post-title" href="{{ path('blog_post', { 'username': post.autor.username, 'slug': post.slug }) }}">{{ post.title }}</a>
 			<small class="post-date">{{ post.published_date | date('d \\d\\e F \\d\\e\\l Y') }}</small>
 		
 			{% set content = post.content | striptags %}
