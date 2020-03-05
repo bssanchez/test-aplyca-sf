@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% if post is defined %}
+		Editar publicación
+	{% else %}
+		Nueva publicación
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<main id="contact-page" class="container py-4">
+		<h1 class="text-center text-danger">{{ title }}</h1>
+
+		<p class="text-center">A countinuación encontrarás un formulario para cargar los datos de la publicación.</p>
+		<hr class="my-4">
+
+		{% if message.text is not empty %}
+			<div class="alert  {{ message.class }}">
+				<p class="mb-0">{{ message.text }}</p>
+			</div>
+		{% endif %}
+
+		{{ form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate'}}) }}
+		<section class="form-container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="blog_title">
+							Titulo<sup>*</sup>
+						</label>
+						{{ form_errors(form.title) }}
+						{{ form_widget(form.title) }}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						{{ form_row(form.image) }}
+						{% if post is defined %}
+							{% if post.featured_image is defined and post.featured_image is not empty %}
+								<small><a href="{{ asset('uploads/posts/' ~ post.featured_image) }}" target="_blank">Ver imagen actual</a></small>
+							{% else %}
+								<small><a href="{{ asset('uploads/posts/post-image-dummy.png') }}" target="_blank">Ver imagen actual</a></small>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="form-group">
+						<label for="blog_content">
+							Contenido<sup>*</sup>
+						</label>
+						{{ form_errors(form.content) }}
+						{{ form_widget(form.content, {'attr': {'rows': 8} }) }}
+					</div>
+				</div>
+				{{ form_rest(form) }}
+			</div>
+
+			<div class="row">
+				<div class="col-sm-5 d-flex flex-column justify-content-center">
+					<small><strong>Autor:</strong> {{ app.user.fullname }} &lt;{{ app.user.email }}&gt;</small>
+					<small><strong>Fecha:</strong> {{ 'now' | date('d \\d\\e F \\d\\e\\l Y') }}</small>
+				</div>
+				<div class="col-sm-7 text-right">
+					<button type="submit" class="btn btn-outline-primary">
+						<i class="far fa-paper-plane"></i>
+						GUARDAR
+					</button>
+				</div>
+			</div>
+		</section>
+		{{ form_end(form) }}
+	</main>
+{% endblock %}

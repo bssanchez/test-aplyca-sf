@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -18,6 +19,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $title;
 
@@ -29,10 +31,11 @@ class Post
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $featured_image;
+    public $featured_image;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $content;
 

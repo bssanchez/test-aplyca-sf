@@ -32,8 +32,7 @@ class PostRepository extends ServiceEntityRepository
             ->innerJoin('p.autor', 'u')
             ->setMaxResults($max)
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY)
-        ;
+            ->getResult(Query::HYDRATE_ARRAY);
     }
 
     /**
@@ -46,8 +45,21 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy("p.{$orderBy}", $order)
             ->innerJoin('p.autor', 'u')
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY)
-        ;
+            ->getResult(Query::HYDRATE_ARRAY);
+    }
+
+    public function findByUsernameAndSlug($username, $slug)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->andWhere('u.username = :username')
+            ->setParameter('username', $username)
+            ->addSelect('u')
+            ->innerJoin('p.autor', 'u')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
     }
 
     // /**

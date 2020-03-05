@@ -6,6 +6,7 @@
  */
 require('bootstrap');
 require('@fortawesome/fontawesome-free/css/all.min.css');
+require('tinymce');
 
 const $ = require('jquery');
 
@@ -16,5 +17,8 @@ import '../scss/app.scss';
 // import $ from 'jquery';
 
 $(document).ready(() => {
-  console.log('Hello Webpack Encore!');
+  // Initialize the app
+  tinymce.init({
+    selector: '.tinymce'
+  });
 });

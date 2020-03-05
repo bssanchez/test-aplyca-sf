@@ -5,8 +5,8 @@ blog_post:
   path: /blog/{username}/{slug}
   controller: App\Controller\BlogController::detail
   requirements:
-    username: '\w+'
-    slug: '\w+'
+    username: '[A-Za-z0-9_-]+'
+    slug: '[A-Za-z0-9_-]+'
 blog_list:
   path: /blog/{page}
   controller: App\Controller\BlogController::index
@@ -16,7 +16,7 @@ blog_list:
     page: '\d+'
 blog_edit:
   path: /edit/{post_id}
-  controller: App\Controller\BlogController::index
+  controller: App\Controller\BlogController::editPost
   requirements:
     post_id: '\d+'
 contact:
