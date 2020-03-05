@@ -7,8 +7,16 @@
 {% block body %}
 
 
-	<main id="home-page" class="container">
-		<h1 class="text-center text-danger">{{ title }}!</h1>
+	<main id="home-page" class="container py-4">
+		<h1 class="text-center text-danger">{{ title }}</h1>
+		<div class="jumbotron">
+			<p>Blog realizado en <strong>symfony 5</strong> con las siguientes librerías:</p>
+
+			<ul class="mb-0">
+				<li>Bootstrap 4</li>
+				<li>jQuery 3.4.1</li>
+			</ul>
+		</div>
 		<hr>
 
 
@@ -16,23 +24,15 @@
 			<h2 class="subtitle">Últimas publicaciones</h2>
 
 			<div class="row">
-				<article class="col-md-4">
-					<div class="last-posts__item">
-						<img src="{{ asset('build/images/post-image-dummy.png') }}" alt="Post title dummy" class="img-fluid">
+				{% for post in posts %}
+					<article class="col-md-4">
+						{% include '_parts/post-item.html.twig' with { 'post': post } only %}
+					</article>
+				{% endfor %}
+			</div>
 
-						<div class="info-container">
-							<div>
-								<a class="post-title" href="#">Post title dummy</a>
-								<small class="post-date">30 de Enero del 2020</small>
-
-								<p class="post-excerpt">Lorem ipsum dolor sit ammet consectetur adispiscing lol...</p>
-							</div>
-							<div>
-								<img src="{{ asset('build/images/post-autor-dummy.png') }}" alt="Post Author" title="Post Author" class="img-fluid img-thumbnail rounded-circle">
-							</div>
-						</div>
-					</div>
-				</article>
+			<div class="my-3 text-right">
+				<a href="{{ path('blog_list') }}" class="btn btn-danger">VER TODAS</a>
 			</div>
 		</section>
 	</main>

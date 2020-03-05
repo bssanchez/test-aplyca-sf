@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Registro
+{% endblock %}
+
+{% block body %}
+	<main id="signin-page" class="container py-4">
+		<h1 class="text-center text-danger">{{ title }}</h1>
+
+		<hr class="my-4">
+
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				{% if message.text is not empty %}
+					<div class="mb-4 alert {{ message.class }}">
+						<p class="mb-0">{{ message.text }}</p>
+					</div>
+				{% endif %}
+
+
+				{{ form_start(form, {'action': path('register'), 'method': 'POST', 'attr': {'novalidate': 'novalidate'}}) }}
+				<div class="form-group">
+					<label for="register_email">
+						Correo electrónico<sup>*</sup>
+					</label>
+					{{ form_widget(form.email, {'attr': {'placeholder': 'ej. sholmes@bakerstreet.dom'} }) }}
+					{{ form_errors(form.email) }}
+				</div>
+				<div class="form-group">
+					<label for="register_fullname">
+						Nombre completo<sup>*</sup>
+					</label>
+					{{ form_widget(form.fullname, {'attr': {'placeholder': 'ej. Sherlock Holmes'} }) }}
+					{{ form_errors(form.fullname) }}
+				</div>
+				<div class="form-group">
+					<label for="register_passsword">Contraseña<sup>*</sup>
+					</label>
+					{{ form_widget(form.password) }}
+					{{ form_errors(form.password) }}
+				</div>
+				<div class="form-group">
+					<label for="register_password_repeat">Repetir Contraseña<sup>*</sup>
+					</label>
+					<input type="password" name="password_repeat" id="register_password_repeat" class="form-control" required>
+				</div>
+
+				{{ form_rest(form) }}
+
+				<div class="w-100 text-right">
+					<button class="btn btn-primary" type="submit">
+						Registrarme
+					</button>
+				</div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</main>
+{% endblock %}

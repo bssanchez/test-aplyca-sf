@@ -1,20 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}
+	Contáctanos
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<main id="contact-page" class="container py-4">
+		<h1 class="text-center text-danger">{{ title }}</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<p class="text-center">A countinuación encontrarás un formulario con el podrás hacernos llegar tus inquietudes, problemas o sugerencias.</p>
+		<hr class="my-4">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/http/labs/web/test-aplyca-sf/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/http/labs/web/test-aplyca-sf/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
+		{% if message.text is not empty %}
+			<div class="alert  {{ message.class }}"><p class="mb-0">{{ message.text }}</p></div>
+		{% endif %}
+
+		{{ form_start(form, {'action': path('contact'), 'method': 'POST', 'attr': {'novalidate': 'novalidate'}}) }}
+		<section class="form-container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="contact_name">
+							Nombre<sup>*</sup>
+						</label>
+						{# <input type="text" name="name" id="name" class="form-control" placeholder=""> #}
+						{{ form_widget(form.name, {'attr': {'placeholder': 'ej. Sherlock Holmes'} }) }}
+						{{ form_errors(form.name) }}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="contact_email">
+							Correo electrónico<sup>*</sup>
+						</label>
+						{{ form_widget(form.email, {'attr': {'placeholder': 'ej. sholmes@bakerstreet.dom'} }) }}
+						{{ form_errors(form.email) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="form-group">
+						<label for="contact_message">
+							Mensaje<sup>*</sup>
+						</label>
+						{{ form_widget(form.message, {'attr': {'placeholder': 'ej. Hola mundo!', 'rows': 5} }) }}
+						{{ form_errors(form.message) }}
+					</div>
+				</div>
+
+				{{ form_rest(form) }}
+				<div class="col-12 text-right">
+					<button type="submit" class="btn btn-outline-primary">
+						<i class="far fa-paper-plane"></i>
+						ENVIAR
+					</button>
+				</div>
+			</div>
+		</section>
+		{{ form_end(form) }}
+	</main>
 {% endblock %}

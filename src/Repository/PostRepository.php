@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +19,47 @@ class PostRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
+    }
+
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+    public function getLastOrdered($max = 3, $orderBy = 'published_date', $order = 'DESC')
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('u')
+            ->orderBy("p.{$orderBy}", $order)
+            ->innerJoin('p.autor', 'u')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+    }
+
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findAllWithAuthor($orderBy = 'published_date', $order = 'DESC')
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('u')
+            ->orderBy("p.{$orderBy}", $order)
+            ->innerJoin('p.autor', 'u')
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+    }
+
+    public function findByUsernameAndSlug($username, $slug)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->andWhere('u.username = :username')
+            ->setParameter('username', $username)
+            ->addSelect('u')
+            ->innerJoin('p.autor', 'u')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
     }
 
     // /**
